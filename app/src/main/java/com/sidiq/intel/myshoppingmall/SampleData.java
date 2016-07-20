@@ -19,7 +19,10 @@ public class SampleData {
                     "Rp. 799.000"}
     };
 
-
-
-
+    public static String[] thumb = new String[]{
+            "http://bro.do/6158-product_thumbnail_default/tambora-choco-tan-black-sole.jpg",
+            "http://bro.do/6159-product_thumbnail_default/tambora-choco-tan-black-sole.jpg",
+            "http://bro.do/6160-product_thumbnail_default/tambora-choco-tan-black-sole.jpg",
+            "http://bro.do/6161-product_thumbnail_default/tambora-choco-tan-black-sole.jpg"
+    };
 }
