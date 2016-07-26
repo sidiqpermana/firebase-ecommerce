@@ -1,4 +1,4 @@
-package com.sidiq.intel.myshoppingmall;
+package com.sidiq.intel.myshoppingmall.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,8 +11,9 @@ public class AppPreference {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private String PREFS_NAME = "MyShoppingAppPrefs";
-    private String KEY_USERNAME = "USERNAME";
+    private String KEY_EMAIL = "EMAIL";
     private String KEY_USERID = "USERID";
+    private String KEY_USERNAME = "username";
 
     public AppPreference(Context context){
         this.context = context;
@@ -20,13 +21,13 @@ public class AppPreference {
         editor = sharedPreferences.edit();
     }
 
-    public void setUsername(String username){
-        editor.putString(KEY_USERNAME, username);
+    public void setEmail(String email){
+        editor.putString(KEY_EMAIL, email);
         editor.commit();
     }
 
-    public String getUsername(){
-        return sharedPreferences.getString(KEY_USERNAME, "");
+    public String getEmail(){
+        return sharedPreferences.getString(KEY_EMAIL, "");
     }
 
     public void setUserId(String userId){
@@ -36,6 +37,15 @@ public class AppPreference {
 
     public String getUserId(){
         return sharedPreferences.getString(KEY_USERID, "");
+    }
+
+    public void setUsername(String username){
+        editor.putString(KEY_USERNAME, username);
+        editor.commit();
+    }
+
+    public String getUsername(){
+        return sharedPreferences.getString(KEY_USERNAME, "");
     }
 
     public void clear(){

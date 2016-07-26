@@ -4,6 +4,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.sidiq.intel.myshoppingmall.adapter.ImagePagerAdapter;
+
 import java.util.ArrayList;
 
 public class DetailImageActivity extends AppCompatActivity {

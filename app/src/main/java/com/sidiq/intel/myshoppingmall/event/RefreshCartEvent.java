@@ -1,4 +1,4 @@
-package com.sidiq.intel.myshoppingmall;
+package com.sidiq.intel.myshoppingmall.event;
 
 /**
  * Created by inte on 7/22/2016.

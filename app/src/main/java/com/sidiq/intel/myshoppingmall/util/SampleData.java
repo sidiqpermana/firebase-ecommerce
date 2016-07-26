@@ -1,4 +1,4 @@
-package com.sidiq.intel.myshoppingmall;
+package com.sidiq.intel.myshoppingmall.util;
 
 /**
  * Created by inte on 7/19/2016.

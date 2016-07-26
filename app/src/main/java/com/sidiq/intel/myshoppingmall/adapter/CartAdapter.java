@@ -1,4 +1,4 @@
-package com.sidiq.intel.myshoppingmall;
+package com.sidiq.intel.myshoppingmall.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.sidiq.intel.myshoppingmall.util.CustomOnItemClickListener;
+import com.sidiq.intel.myshoppingmall.util.CustomOnItemSelectedListener;
+import com.sidiq.intel.myshoppingmall.R;
+import com.sidiq.intel.myshoppingmall.event.RefreshCartEvent;
 import com.sidiq.intel.myshoppingmall.db.CartHelper;
 import com.sidiq.intel.myshoppingmall.db.CartItem;
 

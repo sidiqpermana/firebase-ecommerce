@@ -1,9 +1,19 @@
 package com.sidiq.intel.myshoppingmall;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
+
+import com.sidiq.intel.myshoppingmall.preference.AppPreference;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class SplashscreenActivity extends AppCompatActivity {
 
@@ -47,7 +57,7 @@ public class SplashscreenActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
 
             Intent intent = null;
-            if (appPreference.getUserId().equals("")){
+            if (appPreference.getUserId().equals("") && appPreference.getEmail().equals("")){
                 intent = new Intent(SplashscreenActivity.this, LoginActivity.class);
             }else{
                 intent = new Intent(SplashscreenActivity.this, HomeActivity.class);

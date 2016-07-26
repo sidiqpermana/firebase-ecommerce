@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "568290822038",
+    "firebase_url": "https://mystoreonline-d5e2f.firebaseio.com",
+    "project_id": "mystoreonline-d5e2f",
+    "storage_bucket": "mystoreonline-d5e2f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568290822038:android:fdda053b93c1f00b",
+        "android_client_info": {
+          "package_name": "com.sidiq.intel.myshoppingmall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "568290822038-5o4mb1uksmd4do6hc973l4sc4s3116he.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sidiq.intel.myshoppingmall",
+            "certificate_hash": "BE19F6EE749F0D804256EDA6018B1F60EDF0F424"
+          }
+        },
+        {
+          "client_id": "568290822038-thkc1rjo3a9dhr0q8vsbv8h2dhpou1hh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtAeZ8lCH6rV3HXkEXkJje8Rlq3c9u4Hc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "568290822038-thkc1rjo3a9dhr0q8vsbv8h2dhpou1hh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

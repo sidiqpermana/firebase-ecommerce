@@ -1,4 +1,4 @@
-package com.sidiq.intel.myshoppingmall;
+package com.sidiq.intel.myshoppingmall.util;
 
 import android.view.View;
 import android.widget.AdapterView;

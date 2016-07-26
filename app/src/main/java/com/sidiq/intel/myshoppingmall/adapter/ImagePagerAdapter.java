@@ -1,8 +1,10 @@
-package com.sidiq.intel.myshoppingmall;
+package com.sidiq.intel.myshoppingmall.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.sidiq.intel.myshoppingmall.fragment.ImageFragment;
 
 import java.util.ArrayList;
 

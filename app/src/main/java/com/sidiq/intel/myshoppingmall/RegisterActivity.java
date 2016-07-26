@@ -1,10 +1,11 @@
 package com.sidiq.intel.myshoppingmall;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -12,16 +13,16 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.loopj.android.http.RequestParams;
-import com.sidiq.intel.myshoppingmall.api.request.PostRegisterRequest;
-import com.sidiq.intel.myshoppingmall.api.response.BaseResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RegisterActivity extends AppCompatActivity
-        implements PostRegisterRequest.OnPostRegisterRequestListener,
-        View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity implements
+        View.OnClickListener, OnCompleteListener<AuthResult> {
 
     @BindView(R.id.edt_username)
     EditText edtUsername;
@@ -33,15 +34,17 @@ public class RegisterActivity extends AppCompatActivity
     CheckBox cbToc;
     @BindView(R.id.btn_register)
     Button btnRegister;
-
     private ProgressDialog progressDialog;
-    private PostRegisterRequest postRegisterRequest;
+
+    private FirebaseAuth mFirebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
         btnRegister.setOnClickListener(this);
 
@@ -52,8 +55,6 @@ public class RegisterActivity extends AppCompatActivity
         progressDialog.setTitle("Register");
         progressDialog.setMessage("Please wait...");
 
-        postRegisterRequest = new PostRegisterRequest();
-        postRegisterRequest.setOnPostRegisterRequestListener(this);
     }
 
     @Override
@@ -78,14 +79,8 @@ public class RegisterActivity extends AppCompatActivity
                         Toast.LENGTH_SHORT).show();
             }else{
                 if (cbToc.isChecked()){
-                    RequestParams mRequestParams = new RequestParams();
-                    mRequestParams.put("username", username);
-                    mRequestParams.put("password", password);
-                    mRequestParams.put("email", email);
-
-                    postRegisterRequest.setPostRequestParams(mRequestParams);
                     progressDialog.show();
-                    postRegisterRequest.callApi();
+                    mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this);
                 }else{
                     Toast.makeText(RegisterActivity.this,
                             "You have to check the ToC", Toast.LENGTH_SHORT).show();
@@ -95,26 +90,15 @@ public class RegisterActivity extends AppCompatActivity
     }
 
     @Override
-    public void onPostRegisterSuccess(BaseResponse response) {
+    public void onComplete(@NonNull Task<AuthResult> task) {
         progressDialog.cancel();
-
-        Toast.makeText(RegisterActivity.this, response.getMessage(), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-
-        startActivity(intent);
-        finish();
-    }
-
-    @Override
-    public void onPostRegisterFailure(String errorMessage) {
-        progressDialog.cancel();
-
-        Toast.makeText(RegisterActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        postRegisterRequest.cancelRequest();
-        super.onDestroy();
+        if (task.isSuccessful()){
+            Toast.makeText(this, "Register Success. Please Login", Toast.LENGTH_LONG).show();
+            LoginActivity.start(this);
+            finish();
+        }else{
+            Toast.makeText(this, "Register Failed. Please try again", Toast.LENGTH_LONG).show();
+            Log.d("Firebase", task.getException().getMessage());
+        }
     }
 }

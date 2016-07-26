@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,6 +16,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.sidiq.intel.myshoppingmall.db.CartHelper;
 import com.sidiq.intel.myshoppingmall.db.CartItem;
+import com.sidiq.intel.myshoppingmall.model.Item;
+import com.sidiq.intel.myshoppingmall.util.SampleData;
+import com.sidiq.intel.myshoppingmall.util.Util;
 
 import java.util.ArrayList;
 
@@ -33,7 +35,7 @@ public class DetailProductActivity extends AppCompatActivity
     private Toolbar toolbar;
 
     private int currentImagePosition = 0;
-    private Product selectedProduct;
+    private Item selectedProduct;
 
     private CartHelper mCartHelper;
 
@@ -73,9 +75,9 @@ public class DetailProductActivity extends AppCompatActivity
 
         selectedProduct = getIntent().getParcelableExtra("product");
         tvName.setText(selectedProduct.getName());
-        tvPrice.setText(selectedProduct.getPrice());
+        tvPrice.setText(Util.getCurrency(selectedProduct.getPrice()));
         Glide.with(DetailProductActivity.this)
-                .load(selectedProduct.getImageUrl())
+                .load(selectedProduct.getImage())
                 .into(imgDetail);
 
         String[] size = new String[]{
@@ -152,14 +154,14 @@ public class DetailProductActivity extends AppCompatActivity
                 break;
 
             case R.id.btn_add_to_cart:
-                if (mCartHelper.isItemAlreadyExist((int)selectedProduct.getId())){
+                if (mCartHelper.isItemAlreadyExist(Integer.parseInt(selectedProduct.getProduct_id()))){
                     Toast.makeText(DetailProductActivity.this,
                             "This product is already in cart", Toast.LENGTH_SHORT).show();
                 }else{
-                    mCartHelper.create((int)selectedProduct.getId(),
+                    mCartHelper.create(Integer.parseInt(selectedProduct.getProduct_id()),
                             selectedProduct.getName(),
-                            selectedProduct.getImageUrl(),
-                            1, Double.parseDouble(selectedProduct.getPrice()));
+                            selectedProduct.getImage(),
+                            1, selectedProduct.getPrice());
                     Toast.makeText(DetailProductActivity.this,
                             "This product is successfully added", Toast.LENGTH_SHORT).show();
 

@@ -60,6 +60,13 @@ public class CartHelper {
         realm.commitTransaction();
     }
 
+    public void clear(){
+        realm.beginTransaction();
+        RealmResults<CartItem> items = realm.where(CartItem.class).findAll();
+        items.deleteAllFromRealm();
+        realm.commitTransaction();
+    }
+
     public boolean isItemAlreadyExist(int productId){
         CartItem cartItem = realm.where(CartItem.class)
                 .equalTo("id", productId).findFirst();

@@ -1,4 +1,4 @@
-package com.sidiq.intel.myshoppingmall;
+package com.sidiq.intel.myshoppingmall.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.sidiq.intel.myshoppingmall.R;
+import com.sidiq.intel.myshoppingmall.model.Item;
+import com.sidiq.intel.myshoppingmall.util.Util;
 
 import java.util.ArrayList;
 
@@ -18,17 +21,17 @@ import java.util.ArrayList;
  */
 public class ProductAdapter extends BaseAdapter {
     private Activity activity;
-    private ArrayList<Product> listItem;
+    private ArrayList<Item> listItem;
 
     public ProductAdapter(Activity activity){
         this.activity = activity;
     }
 
-    public ArrayList<Product> getListItem() {
+    public ArrayList<Item> getListItem() {
         return listItem;
     }
 
-    public void setListItem(ArrayList<Product> listItem) {
+    public void setListItem(ArrayList<Item> listItem) {
         this.listItem = listItem;
     }
 
@@ -63,12 +66,12 @@ public class ProductAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
-        Product item = getListItem().get(i);
+        Item item = getListItem().get(i);
         holder.tvName.setText(item.getName());
-        holder.tvPrice.setText(item.getPrice());
+        holder.tvPrice.setText(Util.getCurrency(item.getPrice()));
 
         Glide.with(activity)
-                .load(item.getImageUrl())
+                .load(item.getImage())
                 .into(holder.imgItem);
 
         return convertView;
